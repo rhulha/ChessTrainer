@@ -2,13 +2,13 @@ import { Chessboard, objToFen } from './chessboard.js';
 const { parse } = PgnParser;
 import { move_sound, getRandomInt } from './utils.js'
 
-import { italian_game } from './lines/italian-game.js';
-import { fried_liver } from './lines/fried-liver-pgns.js';
-import { against_caro_kann } from './lines/against_caro_kann.js';
-import { scandi } from './lines/scandi.js';
-import { sicilian } from './lines/sicilian.js';
-import { queens_gambit } from './lines/queens_gambit.js';
-import { E4E5 } from './lines/E4.js';
+import { italian_game } from './white-lines/italian-game.js';
+import { fried_liver } from './white-lines/fried-liver-pgns.js';
+import { against_caro_kann } from './white-lines/against_caro_kann.js';
+import { scandi } from './white-lines/scandi.js';
+import { sicilian } from './white-lines/sicilian.js';
+import { queens_gambit } from './white-lines/queens_gambit.js';
+import { E4E5 } from './white-lines/E4.js';
 
 
 let possible_lines = {};
@@ -42,8 +42,7 @@ document.getElementById('caption').innerText ="";
 let pgn = possible_lines["E4E5.boden_kieseritzky_gambit"];
 
 
-// TODO: Add code that saves played lines and will not go down that path against_caro_kann
-// TODO: Also add code that reloads the line so we don't lose the played lines list
+
 
 let pgn_moves = parse(pgn, { startRule: 'game' }).moves;
 
