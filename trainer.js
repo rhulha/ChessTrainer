@@ -9,10 +9,24 @@ export function createTrainer(possible_lines, {
   opponentCastlingMoves = [],
 } = {}) {
 
-  let lines = document.getElementById('lines');
-  for (let key in possible_lines) {
-    lines.add(new Option(key));
+  const opening = document.getElementById('opening');
+  const lines = document.getElementById('lines');
+
+  const openings = [...new Set(Object.keys(possible_lines).map(k => k.split('.')[0]))];
+  for (const o of openings) opening.add(new Option(o));
+
+  function populateLines(selectedOpening) {
+    lines.innerHTML = '';
+    for (const key of Object.keys(possible_lines).filter(k => k.startsWith(selectedOpening + '.'))) {
+      lines.add(new Option(key.split('.').slice(1).join('.'), key));
+    }
   }
+  populateLines(openings[0]);
+
+  opening.addEventListener('change', () => {
+    populateLines(opening.value);
+    lines.dispatchEvent(new Event('change'));
+  });
 
   let caption = document.getElementById('caption');
   caption.innerText = "";
@@ -58,7 +72,7 @@ export function createTrainer(possible_lines, {
   }
 
   lines.addEventListener("change", () => {
-    let pgn = possible_lines[lines.selectedOptions[0].value];
+    let pgn = possible_lines[lines.value];
     pgn_moves = parse(pgn, { startRule: 'game' }).moves;
     internal_board.reset();
     visible_board.start();
