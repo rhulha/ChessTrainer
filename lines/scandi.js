@@ -1,5 +1,5 @@
 export var scandi = {
- 
+
  // https://www.youtube.com/watch?v=9a89-9ehKf8
  icbm: "1. e4 d5 2. Nf3 dxe4 3. Ng5 Nf6 4. d3 exd3 5. Bxd3 h6 6. Nxf7 Kxf7 7. Bg6+ Kxg6 8. Qxd8 *",
 
@@ -16,8 +16,5 @@ export var scandi = {
  queen_goes_back: "1. e4 d5 2. exd5 Qxd5 3. Nc3 Qd8 4. d4 Nc6 5. d5 Ne5 6. Nf3 Bg4 7. Nxe5 Bxd1 8. Bb5+ c6 9. dxc6 bxc6 10. Bxc6+ Qd7 11. Bxd7+ Kd8 12. Bc6 Rc8 13. Bf4 Rxc6 14. Nxc6+ Kd7 15. Nb8+ Ke8 16. Rxd1"
 
  // Agadmator : https://www.youtube.com/watch?v=k--pPxSH9Tg
-  
+
 }
-
-
-

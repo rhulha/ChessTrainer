@@ -1,4 +1,4 @@
-import $ from "./jquery.module";
+import $ from "./jquery.module.js";
 
 
 // ---------------------------------------------------------------------------
@@ -1796,4 +1796,3 @@ function constructor (containerElOrString, config) {
 } // end constructor
 
 export var Chessboard = constructor;
-

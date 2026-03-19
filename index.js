@@ -1,23 +1,15 @@
-import './style.css';
-import { Chessboard, objToFen } from './chessboard';
+import { Chessboard, objToFen } from './chessboard.js';
 import { Chess } from 'chess.js';
-// import parser from '@mliebelt/pgn-parser'
 import { parse } from '@mliebelt/pgn-parser';
-import { move_sound, getRandomInt } from './utils'
+import { move_sound, getRandomInt } from './utils.js'
 
-// import { pgns } from './pgns';
-// import { traxler } from './traxler';
-import { italian_game } from './lines/italian-game';
-import { fried_liver } from './lines/fried-liver-pgns';
-import { against_caro_kann } from './lines/against_caro_kann';
-import { scandi } from './lines/scandi';
-import { sicilian } from './lines/sicilian';
-import { queens_gambit } from './lines/queens_gambit';
-import { E4E5 } from './lines/E4';
-
-// var fried_liver_pgn = pgns.more_traxler_variants;
-// var fried_liver_pgn = traxler.taking_the_bishop;
-// var pgn = caro_kann.heavy_line;
+import { italian_game } from './lines/italian-game.js';
+import { fried_liver } from './lines/fried-liver-pgns.js';
+import { against_caro_kann } from './lines/against_caro_kann.js';
+import { scandi } from './lines/scandi.js';
+import { sicilian } from './lines/sicilian.js';
+import { queens_gambit } from './lines/queens_gambit.js';
+import { E4E5 } from './lines/E4.js';
 
 
 let possible_lines = {};
@@ -42,7 +34,7 @@ possible_lines["E5.jonathan_schranz_most_complicated_gambit_ever1"]=E4E5.jonatha
 
 let possible_lines_size = Object.keys(possible_lines).length;
 
-let lines = document.getElementById('lines') as HTMLSelectElement;
+let lines = document.getElementById('lines');
 for( let key in possible_lines) {
   lines.add(new Option(key));
 }
@@ -55,13 +47,11 @@ let pgn = possible_lines["E4E5.boden_kieseritzky_gambit"];
 // TODO: Add code that saves played lines and will not go down that path against_caro_kann
 // TODO: Also add code that reloads the line so we don't lose the played lines list
 
-let pgn_moves = (parse(pgn, { startRule: 'game' }) as any).moves;
+let pgn_moves = parse(pgn, { startRule: 'game' }).moves;
 
 if (false) {
   pgn_moves[5].variations = []; // remove anti fried liver move.
 }
-
-//console.log(JSON.stringify(fried_liver));
 
 var config = {
   draggable: true,
@@ -70,12 +60,12 @@ var config = {
 };
 
 var internal_board = new Chess();
-var visible_board = Chessboard('board1', config) as any;
+var visible_board = Chessboard('board1', config);
 
 lines.addEventListener("change", ()=>{
-  
+
   let pgn = possible_lines[lines.selectedOptions[0].value];
-  pgn_moves = (parse(pgn, { startRule: 'game' }) as any).moves;
+  pgn_moves = parse(pgn, { startRule: 'game' }).moves;
   internal_board.reset();
   visible_board.start();
   move_counter = 0
@@ -148,11 +138,9 @@ function onDrop(source, target, piece, newPos, oldPos) {
         console.log('using variation: ' + r);
         if (r > 0) {
           pgn_moves = pgn_opponent_move.variations[r - 1];
-          //console.log("pgn_moves: " + JSON.stringify(pgn_moves));
 
           move_counter = 0;
           pgn_opponent_move = pgn_moves[move_counter++];
-          //console.log("pgn_opponent_move: " + JSON.stringify(pgn_opponent_move));
         }
       }
 
@@ -163,10 +151,8 @@ function onDrop(source, target, piece, newPos, oldPos) {
       if (internal_board.in_checkmate()) {
         alert('Congratulations You Win!');
       }
-      //console.log(result)
 
       visible_board.move(result.from + '-' + result.to);
-      //board.move('e2-e4');
     } else {
       console.log("internal_board_fen: " + internal_board_fen);
       console.log("visible_board_fen: " + visible_board_fen);
@@ -180,4 +166,3 @@ function onDrop(source, target, piece, newPos, oldPos) {
     }
   }, 20);
 }
-
