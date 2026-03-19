@@ -37,7 +37,8 @@ for( let key in possible_lines) {
   lines.add(new Option(key));
 }
 
-document.getElementById('caption').innerText ="";
+let caption = document.getElementById('caption');
+caption.innerText = "";
 
 let pgn = possible_lines["E4E5.boden_kieseritzky_gambit"];
 
@@ -65,7 +66,8 @@ lines.addEventListener("change", ()=>{
   pgn_moves = parse(pgn, { startRule: 'game' }).moves;
   internal_board.reset();
   visible_board.start();
-  move_counter = 0
+  move_counter = 0;
+  caption.innerText = "";
 })
 
 
@@ -122,7 +124,7 @@ function onDrop(source, target, piece, newPos, oldPos) {
       let len = 0;
 
       if (pgn_opponent_move == undefined) {
-        alert('You Win!');
+        caption.innerText = 'You Win!';
         return;
       }
 
@@ -146,16 +148,14 @@ function onDrop(source, target, piece, newPos, oldPos) {
         pgn_opponent_move.notation.notation
       );
       if (internal_board.in_checkmate()) {
-        alert('Congratulations You Win!');
+        caption.innerText = 'Congratulations You Win!';
       }
 
       visible_board.move(result.from + '-' + result.to);
     } else {
       console.log("internal_board_fen: " + internal_board_fen);
       console.log("visible_board_fen: " + visible_board_fen);
-      alert(
-        'WRONG MOVE. Correct move was: ' + pgn_player_move.notation.notation
-      );
+      caption.innerText = 'Wrong move. Correct: ' + pgn_player_move.notation.notation;
       console.log('Correct move was: ' + pgn_player_move.notation.notation);
       visible_board.position(oldPos);
       internal_board.load(objToFen(oldPos));
