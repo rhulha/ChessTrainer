@@ -1,5 +1,7 @@
 # Chess Trainer
 
+Train online: [rhulha.github.io/ChessTrainer/](https://rhulha.github.io/ChessTrainer/)
+
 A browser-based chess opening trainer. Practice lines as white or black against a scripted opponent.
 
 ## Usage
