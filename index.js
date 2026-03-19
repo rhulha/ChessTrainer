@@ -1,6 +1,5 @@
 import { Chessboard, objToFen } from './chessboard.js';
-import { Chess } from 'chess.js';
-import { parse } from '@mliebelt/pgn-parser';
+const { parse } = PgnParser;
 import { move_sound, getRandomInt } from './utils.js'
 
 import { italian_game } from './lines/italian-game.js';
@@ -30,7 +29,6 @@ possible_lines["sicilian.schrantz_traps"]=sicilian.schrantz_traps;
 possible_lines["fried_liver.with_castling"]=fried_liver.with_castling;
 possible_lines["against_caro_kann.remote_chess_academy"]=against_caro_kann.remote_chess_academy;
 possible_lines["E5.jonathan_schranz_most_complicated_gambit_ever1"]=E4E5.jonathan_schranz_most_complicated_gambit_ever1;
-
 
 let possible_lines_size = Object.keys(possible_lines).length;
 
@@ -85,10 +83,10 @@ function make_move_in_internal_board(notation) {
   return result;
 }
 
-document.getElementById('move').addEventListener('click', e=>{
+document.getElementById('move').addEventListener('click', ()=>{
   let result = make_move_in_internal_board(pgn_moves[move_counter++].notation.notation);
   visible_board.move(result.from + '-' + result.to);
-  setTimeout(e=>{
+  setTimeout(()=>{
     result = make_move_in_internal_board(pgn_moves[move_counter++].notation.notation);
     visible_board.move(result.from + '-' + result.to);
   }, 200);
@@ -101,7 +99,7 @@ function onDrop(source, target, piece, newPos, oldPos) {
     return;
   }
 
-  setTimeout((e) => {
+  setTimeout(() => {
 
     if( source == 'e1' && target == 'g1' && piece == 'wK') {
       // castling
