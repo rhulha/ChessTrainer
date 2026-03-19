@@ -3,14 +3,13 @@ import { createTrainer } from './trainer.js';
 import { E5 as D4E5 } from './black-lines/D4.js';
 import { E5 as E4E5, russian_game } from './black-lines/E4.js';
 
-let possible_lines = {};
-possible_lines["D4.Derek_Wu_Trap"] = D4E5.Derek_Wu_Trap_as_black;
-possible_lines["E4E5.turkish_gambit"] = E4E5.turkish_gambit;
-possible_lines["E4E5.against_italian"] = E4E5.against_italian;
-possible_lines["E4E5.traxler_taking_bishop"] = E4E5.traxler_taking_the_bishop;
-possible_lines["E4E5.traxler_not_taking_bishop"] = E4E5.traxler_not_taking_the_bishop;
-possible_lines["E4E5.rousseau_gambit"] = E4E5.rousseau_gambit;
-possible_lines["russian_game.stafford_gambit"] = russian_game.stafford_gambit_rca_variation;
+const modules = { D4E5, E4E5, russian_game };
+
+const possible_lines = Object.fromEntries(
+  Object.entries(modules).flatMap(([name, mod]) =>
+    Object.keys(mod).map(line => [`${name}.${line}`, mod[line]])
+  )
+);
 
 createTrainer(possible_lines, {
   orientation: 'black',
