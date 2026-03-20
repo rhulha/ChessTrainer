@@ -5,6 +5,22 @@ body {
   justify-content: center;
 }
 
+#board-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#resize-handle {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
+  cursor: nwse-resize;
+  background: linear-gradient(135deg, transparent 50%, #606060 50%);
+  z-index: 10;
+}
+
 
 /*! chessboard.js v@VERSION | (c) 2019 Chris Oakman | MIT License chessboardjs.com/license */
 
