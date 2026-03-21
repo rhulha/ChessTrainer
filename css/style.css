@@ -8,9 +8,13 @@ body {
 .chessboard {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  width: min(600px, 80vmin);
+  width: min(800px, 90vmin);
   border: 2px solid #404040;
   box-sizing: border-box;
+}
+
+.chessboard.unlimited {
+  width: 95vmin;
 }
 
 .square {

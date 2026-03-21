@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chess Trainer</title>
-  <link rel="stylesheet" href="style.css">
+  <script>if(new URLSearchParams(location.search).get('side')==='black')document.title='Chess Trainer - Black';</script>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div id="board1"></div>
@@ -15,11 +16,13 @@
   <select id="lines" name="line">
   </select>
   <span>
-    <button id="restart">Restart</button><button id="move">Show Next Move</button>
+    <button id="restart">Restart</button><button id="move">Show Next Move</button><button id="size-toggle">Unlimited Size</button>
   </span>
+  <script>document.getElementById('size-toggle').addEventListener('click', () => { document.querySelector('.chessboard').classList.toggle('unlimited'); });</script>
   <br>
-  <a href="black.html">Play as Black</a>
+  <a id="side-link" href="?side=black">Play as Black</a>
+  <script>if(new URLSearchParams(location.search).get('side')==='black')document.getElementById('side-link').href='?',document.getElementById('side-link').textContent='Play as White';</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
-  <script type="module" src="./js/white.js"></script>
+  <script type="module" src="./js/main.js"></script>
 </body>
 </html>
