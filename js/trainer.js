@@ -1,5 +1,5 @@
 import { Chessboard, objToFen } from './chessboard.js';
-const { parse } = PgnParser;
+import { parse } from './pgn-parser.js';
 import { move_sound, getRandomInt } from './utils.js';
 
 export function createTrainer(possible_lines, {
