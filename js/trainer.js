@@ -33,10 +33,6 @@ export function createTrainer(possible_lines, {
 
   let pgn_moves = parse(possible_lines[Object.keys(possible_lines)[0]], { startRule: 'game' }).moves;
 
-  if (false) {
-    pgn_moves[5].variations = []; // remove anti fried liver move.
-  }
-
   let config = {
     draggable: true,
     position: 'start',
@@ -48,28 +44,6 @@ export function createTrainer(possible_lines, {
 
   let internal_board = new Chess();
   let visible_board = Chessboard('board1', config);
-
-  const boardEl = document.getElementById('board1');
-  const handle = document.getElementById('resize-handle');
-  let _startX, _startWidth;
-
-  handle.addEventListener('mousedown', (e) => {
-    _startX = e.clientX;
-    _startWidth = boardEl.offsetWidth;
-    document.addEventListener('mousemove', _onResizeMove);
-    document.addEventListener('mouseup', _onResizeUp);
-    e.preventDefault();
-  });
-
-  function _onResizeMove(e) {
-    boardEl.style.width = Math.max(200, _startWidth + e.clientX - _startX) + 'px';
-    visible_board.resize();
-  }
-
-  function _onResizeUp() {
-    document.removeEventListener('mousemove', _onResizeMove);
-    document.removeEventListener('mouseup', _onResizeUp);
-  }
 
   let move_counter = 0;
 

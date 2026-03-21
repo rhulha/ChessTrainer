@@ -1,2 +1,4 @@
+USE AI to add more lines
+
 // TODO: Add code that saves played lines and will not go down that path against_caro_kann
 // TODO: Also add code that reloads the line so we don't lose the played lines list
