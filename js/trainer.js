@@ -1,6 +1,12 @@
 import { Chessboard, objToFen } from './chessboard.js';
 import { parse } from './pgn-parser.js';
-import { move_sound, getRandomInt } from './utils.js';
+
+const move_sound = new Audio('../sounds/move.mp3');
+move_sound.volume = 0.2;
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 
 export function createTrainer(possible_lines, {
   orientation = 'white',
